@@ -127,18 +127,19 @@ export default function Navigation() {
 
       </div>
 
-      {/* Mobile Navigation Overlay */}
+      {/* Mobile Navigation Overlay - FIXED SCROLLING */}
       <div 
-        className={`fixed inset-0 top-16 bg-white z-40 transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed inset-x-0 top-16 bg-white z-40 transition-transform duration-300 ease-in-out md:hidden border-t border-gray-100 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
+        style={{ height: 'calc(100dvh - 4rem)' }}
       >
-        <div className="flex flex-col p-6 gap-2 h-full overflow-y-auto">
+        <div className="flex flex-col h-full p-6">
           
-          <div className="pb-4 mb-4 border-b border-gray-100 flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             <Link 
               href="/catalog" 
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-bold transition-all ${
+              className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-bold transition-all ${
                 pathname.includes('/catalog') ? 'bg-gray-50 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
@@ -148,7 +149,7 @@ export default function Navigation() {
             {user?.role === 'member' && (
               <Link 
                 href="/dashboard" 
-                className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold transition-all ${
+                className={`flex items-center justify-between px-4 py-3.5 rounded-xl text-base font-bold transition-all ${
                   pathname.includes('/dashboard') ? 'bg-gray-50 text-gray-900' : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
@@ -166,7 +167,7 @@ export default function Navigation() {
             {user?.role === 'admin' && (
               <Link 
                 href="/admin" 
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-bold transition-all ${
+                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-bold transition-all ${
                   pathname === '/admin' ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
@@ -175,9 +176,9 @@ export default function Navigation() {
             )}
           </div>
 
-          <div className="mt-auto pb-8">
+          <div className="mt-auto mb-6">
             {user ? (
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 pt-6 border-t border-gray-100">
                 <div className="px-4 py-3 bg-gray-50 rounded-xl">
                   <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Signed in as</p>
                   <p className="font-bold text-gray-900 truncate">{user.name}</p>
@@ -190,12 +191,14 @@ export default function Navigation() {
                 </button>
               </div>
             ) : (
-              <Link 
-                href="/login" 
-                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 text-base font-bold text-white bg-gray-900 rounded-xl shadow-md active:scale-95 transition-all"
-              >
-                <User className="w-5 h-5" /> Sign In to Workspace
-              </Link>
+              <div className="pt-6 border-t border-gray-100">
+                <Link 
+                  href="/login" 
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3.5 text-base font-bold text-white bg-gray-900 rounded-xl shadow-md active:scale-95 transition-all"
+                >
+                  <User className="w-5 h-5" /> Sign In to Workspace
+                </Link>
+              </div>
             )}
           </div>
 
